@@ -1,0 +1,3 @@
+- define a structure for the project
+- create a basic project 
+- scaffold vc (categories) e vm
