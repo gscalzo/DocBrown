@@ -4,4 +4,4 @@ $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 
 require "docbrown"
 
-DocBrown::MainCommand.run
+DocBrown::CLI::MainCommand.run
