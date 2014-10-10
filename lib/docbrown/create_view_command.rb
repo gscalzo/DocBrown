@@ -9,7 +9,14 @@ module DocBrown
 
         def execute
             puts "CreateViewCommand #{@name}"
-            puts TemplateFinder.new.templates_for('view')
+            finder = TemplateFinder.new
+            files = finder.templates_for('view')
+            puts finder.expands(files)
+
+            # --- find templates
+            # copy the files given the package
+            # replace the macro
+            # update the project
         end
 
     end
