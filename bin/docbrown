@@ -1,75 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'clamp'
-require 'docbrown'
+$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 
-# Clamp do
-
-#   parameter "prjname:[xcodeproj]", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
-#   option ["--quiet", "-q"], :flag, "silence all output"
-#   option ["-n", "--iterations"], "N", "say it N times", :default => 1 do |s|
-#     Integer(s)
-#   end
-
-#   def execute
-#     project = DocBrown::Project.open(xcodeproj_path)
-#     # project.sync(:prune => prune?, :quiet => quiet?, :no_color => no_color?, :no_default_exclusions => no_default_exclusions?, :group_exclusions => exclusion_list)
-#   end
-
-# end
-
-
-module DocBrown
-
-  class AbstractCommand < Clamp::Command
-
-
-    option "--version", :flag, "show version" do
-      puts DocBrown::VERSION
-      exit(0)
-    end
-
-    def say(message)
-      message = message.upcase if verbose?
-      puts message
-    end
-
-  end
-
-  class CreateModelCommand < AbstractCommand
-    option ["--name", "-n"], "name", "model name"
-
-    def execute
-      say "CreateModelCommand #{name}"
-    end
-  end
-
-  class CreateViewModelCommand < AbstractCommand
-    option ["--tableview", "-tv"], :flag, "ViewController with TableView"
-    parameter "vmname", "ViewModel name", :attribute_name => :viewmodel_name
-    parameter "xcodeproj", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
-
-    def execute
-      say "CreateViewModelCommand #{name}"
-    end
-  end
-
-  class CreateDataStoreCommand < AbstractCommand
-    option ["--name", "-n"], "name", "datastore name"
-
-    def execute
-      say "CreateDataStoreCommand #{name}"
-    end
-  end
-
-  class MainCommand < AbstractCommand
-
-    subcommand "create:model", "Create Model.", CreateModelCommand
-    subcommand "create:viewmodel", "Create ViewModel and ViewController.", CreateViewModelCommand
-    subcommand "create:datastore", "Create DataStore.", CreateDataStoreCommand
-
-  end
-
-end
+require "docbrown"
 
 DocBrown::MainCommand.run
