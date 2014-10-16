@@ -4,13 +4,13 @@ module DocBrown
             @path = path
         end
 
-        def prjname
+        def prjfullname
             files = Dir["#{@path}/*.xcodeproj"]
             return File.basename(files.first) unless files.empty?
         end
 
-        def name
-            prjname.split('.').first
+        def prjname
+            prjfullname.split('.').first
         end
     end
 end

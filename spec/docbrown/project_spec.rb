@@ -7,10 +7,10 @@ describe DocBrown::ProjectFinder do
   describe "#prjname" do
     let (:project_finder) { described_class.new(DUMMY_DOCBROWN_PRJPATH) }
     it "finds project given correct path" do 
-      expect(project_finder.prjname).to eq DUMMY_DOCBROWN_PRJNAME
+      expect(project_finder.prjfullname).to eq DUMMY_DOCBROWN_PRJNAME
     end
     it "finds nmae of theproject given correct path" do 
-      expect(project_finder.name).to eq DUMMY_DOCBROWN_NAME
+      expect(project_finder.prjname).to eq DUMMY_DOCBROWN_NAME
     end
   end
 
