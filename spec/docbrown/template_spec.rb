@@ -16,9 +16,7 @@ describe DocBrown::TemplateFinder do
 
         expect(finder.expands(template_files)).to eq expanded_templates
     end
-
   end
-
 
   def view_templates
       ["<%= viewname %>ViewController+Layout.swift", 
@@ -35,9 +33,28 @@ describe DocBrown::TemplateFinder do
     "template_dir_for_test"
   end
 
-
   def expanded_templates
     view_templates.map { |t| "#{template_dir_for_test}/#{t}"  }
   end
 
+end
+
+describe DocBrown::TemplateFinder do
+  describe '#create_path' do
+    let (:finder) { described_class.new }
+
+
+    it "creates a path" do
+        path = "foo.bar.giff"
+        def finder.root_dir
+            DUMMY_DOCBROWN_TEST_PATH
+        end
+
+        full_path = DUMMY_DOCBROWN_TEST_PATH + "/foo/bar/giff"
+        expect(File.directory?(full_path)).to eq false
+
+        finder.create_path(path)
+        expect(File.directory?(full_path)).to eq true
+    end
+  end
 end

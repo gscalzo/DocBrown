@@ -1,17 +1,20 @@
 require "docbrown/template_finder"
+require "docbrown/project_finder"
 
 module DocBrown
     class CreateViewCommand
         
-        def initialize(name)
+        def initialize(name, xproject, package)
             @name = name
+            @xproject = xproject
+            @package = package
         end
 
         def execute
             puts "CreateViewCommand #{@name}"
             finder = TemplateFinder.new
             files = finder.templates_for('view')
-            puts finder.expands(files)
+            finder.create_path('view' + @package)
 
             # --- find templates
             # copy the files given the package

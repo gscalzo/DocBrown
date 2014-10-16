@@ -9,6 +9,9 @@ module DocBrown
         puts DocBrown::VERSION
         exit(0)
       end
+      option ["--xproject", "--xp"], "XPROJECT", "xproject name", :default => "auto" do |s| 
+        s
+      end
 
       def say(message)
         message = message.upcase if verbose?
@@ -26,13 +29,16 @@ module DocBrown
     end
 
     class CreateViewCommand < AbstractCommand
-      option ["--tableview", "-tv"], :flag, "ViewController with TableView"
-      option ["--textfield", "-tf"], :flag, "ViewController with Textfield"
+      option ["--tableview", "--tv"], :flag, "ViewController with TableView"
+      option ["--textfield", "--tf"], :flag, "ViewController with Textfield"
+      option ["--package", "--pk"], "PKG", "Directory tree in which create the files, in format 'foo.bar.giff'", :default => "." do |s| 
+        s
+      end
+
       parameter "name", "View name", :attribute_name => :view_name
-      parameter "xcodeproj", "Path to the xcodeproj", :attribute_name => :xcodeproj_path
 
       def execute
-        DocBrown::CreateViewCommand.new(view_name).execute()
+        DocBrown::CreateViewCommand.new(view_name, xproject, package).execute()
       end
     end
 
