@@ -14,7 +14,7 @@ module DocBrown
             puts "CreateViewCommand #{@name}"
             finder = TemplateFinder.new
             files = finder.templates_for('view')
-            finder.create_path('view' + @package)
+            finder.create_path(File.join(ProjectFinder.new.prjname,'Views', @package, @name))
 
             # --- find templates
             # copy the files given the package
